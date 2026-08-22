@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ServiceDesk - IT Support Ticket Management</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <h1>🎫 ServiceDesk</h1>
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+    <button class="tab-btn" data-tab="create-ticket">New Ticket</button>
+    <button class="tab-btn" data-tab="tickets">Tickets</button>
+    <button class="tab-btn" data-tab="users">Users</button>
+  </nav>
+</header>
+
+<main class="container">
+
+  <!-- DASHBOARD -->
+  <section id="dashboard" class="tab-panel active">
+    <h2>Dashboard</h2>
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card"><span class="stat-value" id="statTotal">-</span><span class="stat-label">Total Tickets</span></div>
+      <div class="stat-card open"><span class="stat-value" id="statOpen">-</span><span class="stat-label">Open</span></div>
+      <div class="stat-card progress"><span class="stat-value" id="statInProgress">-</span><span class="stat-label">In Progress</span></div>
+      <div class="stat-card resolved"><span class="stat-value" id="statResolved">-</span><span class="stat-label">Resolved</span></div>
+      <div class="stat-card closed"><span class="stat-value" id="statClosed">-</span><span class="stat-label">Closed</span></div>
+      <div class="stat-card breached"><span class="stat-value" id="statBreached">-</span><span class="stat-label">SLA Breached</span></div>
+    </div>
+
+    <h3>By Priority</h3>
+    <div class="stats-grid" id="priorityGrid">
+      <div class="stat-card low"><span class="stat-value" id="statLow">-</span><span class="stat-label">Low</span></div>
+      <div class="stat-card medium"><span class="stat-value" id="statMedium">-</span><span class="stat-label">Medium</span></div>
+      <div class="stat-card high"><span class="stat-value" id="statHigh">-</span><span class="stat-label">High</span></div>
+      <div class="stat-card critical"><span class="stat-value" id="statCritical">-</span><span class="stat-label">Critical</span></div>
+    </div>
+  </section>
+
+  <!-- CREATE TICKET -->
+  <section id="create-ticket" class="tab-panel">
+    <h2>Create a New Ticket</h2>
+    <form id="createTicketForm" class="card-form">
+      <label>Title
+        <input type="text" id="ticketTitle" required maxlength="150">
+      </label>
+      <label>Description
+        <textarea id="ticketDescription" required rows="4"></textarea>
+      </label>
+      <label>Category
+        <input type="text" id="ticketCategory" required placeholder="e.g. Hardware, Software, Network">
+      </label>
+      <label>Priority
+        <select id="ticketPriority" required>
+          <option value="LOW">LOW</option>
+          <option value="MEDIUM" selected>MEDIUM</option>
+          <option value="HIGH">HIGH</option>
+          <option value="CRITICAL">CRITICAL</option>
+        </select>
+      </label>
+      <label>Created By (Employee)
+        <select id="ticketCreatedBy" required></select>
+      </label>
+      <button type="submit" class="btn-primary">Create Ticket</button>
+      <p class="form-msg" id="createTicketMsg"></p>
+    </form>
+  </section>
+
+  <!-- TICKET LIST -->
+  <section id="tickets" class="tab-panel">
+    <h2>Tickets</h2>
+    <div class="filters">
+      <label>Status
+        <select id="filterStatus">
+          <option value="">All</option>
+          <option value="OPEN">OPEN</option>
+          <option value="IN_PROGRESS">IN_PROGRESS</option>
+          <option value="RESOLVED">RESOLVED</option>
+          <option value="CLOSED">CLOSED</option>
+        </select>
+      </label>
+      <label>Priority
+        <select id="filterPriority">
+          <option value="">All</option>
+          <option value="LOW">LOW</option>
+          <option value="MEDIUM">MEDIUM</option>
+          <option value="HIGH">HIGH</option>
+          <option value="CRITICAL">CRITICAL</option>
+        </select>
+      </label>
+      <button id="refreshTicketsBtn" class="btn-secondary">Refresh</button>
+    </div>
+    <div id="ticketListContainer" class="ticket-list"></div>
+  </section>
+
+  <!-- USERS -->
+  <section id="users" class="tab-panel">
+    <h2>Users</h2>
+    <form id="createUserForm" class="card-form">
+      <label>Name
+        <input type="text" id="userName" required>
+      </label>
+      <label>Email
+        <input type="email" id="userEmail" required>
+      </label>
+      <label>Role
+        <select id="userRole" required>
+          <option value="EMPLOYEE">EMPLOYEE</option>
+          <option value="SUPPORT_AGENT">SUPPORT_AGENT</option>
+        </select>
+      </label>
+      <button type="submit" class="btn-primary">Add User</button>
+      <p class="form-msg" id="createUserMsg"></p>
+    </form>
+    <div id="userListContainer" class="user-list"></div>
+  </section>
+
+</main>
+
+<!-- TICKET DETAILS MODAL -->
+<div id="ticketModal" class="modal-overlay hidden">
+  <div class="modal">
+    <button id="closeModalBtn" class="modal-close">&times;</button>
+    <div id="ticketModalContent"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
