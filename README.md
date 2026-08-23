@@ -154,12 +154,7 @@ curl -X POST http://localhost:8080/api/users \
   -H "Content-Type: application/json" \
   -d '{"name":"Alice","email":"alice@example.com","role":"EMPLOYEE"}'
 ```
-
-## 9. Screenshots
-
-_(Add screenshots of the Dashboard, Ticket List, and Ticket Details modal here.)_
-
-## 10. Future Improvements
+## 9. Future Improvements
 
 - Proper authentication/authorization (login, sessions, or tokens).
 - Email notifications for SLA breaches and status changes.
